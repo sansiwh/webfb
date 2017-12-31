@@ -1,0 +1,894 @@
+<div class="col-md-12 main-chart" ng-controller="DetailController">
+    <div class="row main_content_row1">
+        <div class="col-md-1 col-md-offset-3">
+            <img ng-src="source/img/{{ main_info_title.main_team_flag }}.png" width="50">
+        </div>
+        <div class="col-md-2 main_title_text" ng-bind="main_info_title.main_team_name"></div>
+        <div class="col-md-2 main_title_text" ng-bind="main_info_title.custom_team_name"></div>
+        <div class="col-md-1">
+            <img ng-src="source/img/{{ main_info_title.custom_team_flag }}.png" width="50">
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" href="#collapseOne">
+                <h4 class="panel-title">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span class="detail_panel">
+                        赔率
+                    </span>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="panel_content_header_left">
+                                    <div class="panel_header_font">赔率指数</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="top_home" class="col-xs-4 panel_header_odd odd_{{click_status1}}" ng-click="oddType(3)" ng-bind="main_info_title.main_team_name"></div>
+                                <div id="top_ping" class="col-xs-4 panel_header_odd odd_{{click_status2}}" ng-click="oddType(1)" ng-bind="pingju"></div>
+                                <div id="top_away" class="col-xs-4 panel_header_odd_right odd_{{click_status3}}" ng-click="oddType(0)" ng-bind="main_info_title.custom_team_name"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 score_odd score_odd_title" ng-bind="main_info_title.main_team_name"></div>
+                                <div class="col-xs-6 score_odd right_border score_color" ng-bind="threeOddClick"></div>
+                            </div>
+                            <div class="row" >
+                                <div ng-repeat="x in scoreOddclick">
+                                    <div class="col-xs-4 score_odd {{$index % 3 == 2 ? 'right_border' : ''}} {{$last == true ? 'right_border' : ''}}"><span class="table_score" ng-bind="x.score"></span><span class="table_odd" ng-bind="x.oddStr"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="panel_content_header_right">
+                                    <div class="panel_header_font">赔率走势图</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <oddtrend></oddtrend>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" href="#collapseTwo">
+                <h4 class="panel-title">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span class="detail_panel">
+                        球队
+                    </span>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="panel_content_header_left">
+                                    <div class="panel_header_font">主客队排名走势图</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <ranktrend></ranktrend>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 right_line">
+                            <div class="row">
+                                <div class="panel_content_header_left">
+                                    <div class="panel_header_font">主队主客场战绩</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    主客场
+                                </div>
+                                <div class="col-xs-1">
+                                    胜
+                                </div>
+                                <div class="col-xs-1">
+                                    平
+                                </div>
+                                <div class="col-xs-1">
+                                    负
+                                </div>
+                                <div class="col-xs-2">
+                                    进球
+                                </div>
+                                <div class="col-xs-2">
+                                    失球
+                                </div>
+                                <div class="col-xs-2">
+                                    胜率
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    主场
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-2">
+                                    22
+                                </div>
+                                <div class="col-xs-2">
+                                    11
+                                </div>
+                                <div class="col-xs-2">
+                                    59%
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    客场
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-2">
+                                    22
+                                </div>
+                                <div class="col-xs-2">
+                                    11
+                                </div>
+                                <div class="col-xs-2">
+                                    59%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="panel_content_header_right">
+                                    <div class="panel_header_font">客队主客场战绩</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    主客场
+                                </div>
+                                <div class="col-xs-1">
+                                    胜
+                                </div>
+                                <div class="col-xs-1">
+                                    平
+                                </div>
+                                <div class="col-xs-1">
+                                    负
+                                </div>
+                                <div class="col-xs-2">
+                                    进球
+                                </div>
+                                <div class="col-xs-2">
+                                    失球
+                                </div>
+                                <div class="col-xs-2">
+                                    胜率
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    主场
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-2">
+                                    22
+                                </div>
+                                <div class="col-xs-2">
+                                    11
+                                </div>
+                                <div class="col-xs-2">
+                                    59%
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    客场
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-1">
+                                    10
+                                </div>
+                                <div class="col-xs-2">
+                                    22
+                                </div>
+                                <div class="col-xs-2">
+                                    11
+                                </div>
+                                <div class="col-xs-2">
+                                    59%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 right_line">
+                            <div class="row">
+                                <div class="panel_content_header_left">
+                                    <div class="panel_header_font">主队小循环分析</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="panel_content_header_right">
+                                    <div class="panel_header_font">客队小循环分析</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 right_line">
+                            <div class="row">
+                                <div class="panel_content_header_left">
+                                    <div class="panel_header_font">对阵跨集团球队</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-10 col-md-offset-1 text_center">
+                                    争冠集团对阵
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-10 col-md-offset-1 text_center">
+                                    保级集团对阵
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="panel_content_header_right">
+                                    <div class="panel_header_font">对阵跨集团球队</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-10 col-md-offset-1 text_center">
+                                    争冠集团对阵
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-10 col-md-offset-1 text_center">
+                                    保级集团对阵
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 col-md-offset-1">
+                                    2017-11-11
+                                </div>
+                                <div class="col-xs-2">
+                                    斯托克城
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    1-1
+                                </div>
+                                <div class="col-xs-2">
+                                    西汉姆联
+                                </div>
+                                <div class="col-xs-2">
+                                    胜
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="text_center">说明：排名1-6为争冠集团&nbsp;&nbsp;&nbsp;&nbsp;排名7-14为中游集团&nbsp;&nbsp;&nbsp;&nbsp;排名15-20为保级集团</div>
+                                <div class="text_center">小循环指该队与所在集团内球队交手情况</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default last_bottom" >
+            <div class="panel-heading" data-toggle="collapse" href="#collapseThree">
+                <h4 class="panel-title">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span class="detail_panel">
+                        球员
+                    </span>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6 right_line">
+                            <div class="row">
+                                <div class="panel_content_header_left">
+                                    <div class="panel_header_font">球队进攻数据</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 text_center">
+                                    球队
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    姓名
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    总进球
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    总助攻
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    关键传球
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    传球次数
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="panel_content_header_right">
+                                    <div class="panel_header_font">球队进攻数据</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 text_center">
+                                    球队
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    姓名
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    总进球
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    总助攻
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    关键传球
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    传球次数
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 right_line">
+                            <div class="row">
+                                <div class="panel_content_header_left">
+                                    <div class="panel_header_font">球队防守数据(场均)</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 text_center">
+                                    球队
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    姓名
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    抢断
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    拦截
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    犯规
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    解围
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="panel_content_header_right">
+                                    <div class="panel_header_font">球队防守数据(场均)</div>
+                                </div>
+                            </div>
+                            <div class="row win_persent_first">
+                                <div class="col-xs-2 text_center">
+                                    球队
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    姓名
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    抢断
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    拦截
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    犯规
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    解围
+                                </div>
+                            </div>
+                            <div class="row win_persent">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                            <div class="row win_persent_end">
+                                <div class="col-xs-2 text_center">
+                                    莱彻斯特
+                                </div>
+                                <div class="col-xs-2 text_center six_name">
+                                    啊啊啊啊啊啊啊
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    111
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    221
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    101
+                                </div>
+                                <div class="col-xs-2 text_center">
+                                    121
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

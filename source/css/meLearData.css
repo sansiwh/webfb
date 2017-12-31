@@ -1,0 +1,41 @@
+.me_lear_main{
+    height: 750px;
+    background-color: #3A3949;
+}
+.me_lear_title{
+    color: white;
+    font-size: 30px;
+    padding-top: 100px;
+    font-weight: 900;
+}
+.me_lear_fu_title{
+    color: #DDDDDD;
+    font-size: 25px;
+    font-weight: 900;
+    padding-top: 20px;
+}
+.bgimg{
+    background-image: url("../img/learn.png");
+    height: 290px;
+}
+.sign_now{
+    width: 180px;
+    margin-top: 30px;
+    height:35px;
+    font-size: 16px;
+}
+.me_lear_card{
+    height: 460px;
+    padding-top: 30px;
+}
+.me_size{
+    font-size: 70px;
+}
+.me_lear_detail_title{
+    margin-top: 30px;
+    font-size: 20px;
+}
+.me_lear_detail{
+    margin-top: 30px;
+    font-size: 16px;
+}

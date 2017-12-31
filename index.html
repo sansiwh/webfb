@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="用数据陪你谈足球">
+    <meta name="baidu-site-verification" content="pUABfE3LRn" />
+    <meta name="keyword" content="谈个球, 足球, 足彩, 数据, 足彩数据, 足球数据, 人工智能足球, 深度学习足球,大数据足球,人工智能足彩">
+    <title>谈个球</title>
+    <link rel="icon" type="image/x-icon" href="source/img/favicon.ico">
+    <link href="source/css/bootstrap.css" rel="stylesheet">
+    <link href="source/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="source/css/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="source/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="source/lineicons/style.css">
+    <link rel="stylesheet" type="text/css" href="source/css/col_self.css">
+
+    <link href="source/css/style.css" rel="stylesheet">
+    <link href="source/css/detail.css" rel="stylesheet">
+    <link href="source/css/meLearData.css" rel="stylesheet">
+    <link href="source/css/login.css" rel="stylesheet">
+    <link href="source/css/style-responsive.css" rel="stylesheet">
+    <script src="source/js/angular.min.js"></script>
+    <script src="source/js/angular-route.min.js"></script>
+    <script src="source/js/chart-master/Chart.js"></script>
+
+</head>
+
+<body>
+<div ng-app="app" ng-controller="index">
+    <section id="container" >
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <header class="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars" data-placement="right"></div>
+            </div>
+            <!--logo start-->
+            <a href="#!/homePage" class="logo"><b>谈个球</b><b class="logo_title">足彩数据专家</b></a>
+            <!--logo end-->
+            <span>
+                <span class="top-main"><a id="home" href="#!/homePage">首页</a></span>
+                <span class="top-main-1"><a id="detail" href="#!/detail">详细数据</a></span>
+                <span class="top-main-1"><a id="meLearData" href="#!/meLearData">智能数据</a></span>
+                <!--<span class="top-main-1"><a id="hisPre" href="#!/hisPre">历史推荐</a></span>
+                <span class="top-main-1"><a id="hisOdd" href="#!/hisOdd">历史赔率</a></span>-->
+            </span>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a id="login" class="logout" href="#!/login">登录</a></li>
+                    <li><a id="register" class="logout" href="#!/register">注册</a></li>
+                    <li><a id="user_name" class="logout" >欢迎回来<span class="user_name_text">张三丰</span></a></li>
+                    <li>
+                        <!--<a class="logout" >个人设置</a>-->
+                        <a  class="dropdown-toggle per_setting" id="dropdownMenu1" data-toggle="dropdown">
+                            个人设置
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a id="user_setting" role="menuitem" tabindex="-1" href="#!/person_center">服务项目</a>
+                            </li>
+                            <li role="presentation">
+                                <a id="changePwd" role="menuitem" tabindex="-1" href="#!/changePwd">修改密码</a>
+                            </li>
+                            <li role="presentation">
+                                <a id="user_out" role="menuitem" tabindex="-1">退出</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </header>
+        <!--header end-->
+
+        <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar"  class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu">
+
+                    <li id="left_menu_title" class="left_menu_title">
+                        <a class="active left_menu_title_a" href="javascript:">
+                            <span>英格兰超级联赛</span>
+                            <span class="left_menu_title_turn">
+                              第<span class="left_menu_title_turn_str" ng-bind="premier_turn"></span>轮
+                          </span>
+                        </a>
+                    </li>
+
+                    <li ng-repeat="x in sidebar_match_info" class="sub-menu left_menu_1" ng-click="rowInfo(x)">
+                        <a class="left_menu_title_a_1"  href="javascript:;" >
+                            <div class="menu_match_time">
+                                <div>
+                                    <span class="menu_span_left" ng-bind="x.main_team_name"></span>
+                                    <img class="menu_img_left" ng-src="source/img/{{ x.main_team_flag }}.png" width="25">
+                                </div>
+                            </div>
+                            <div class="menu_match_time text-center">
+                                <div ng-bind="x.match_date"></div>
+                                <div ng-bind="x.match_time"></div>
+                            </div>
+                            <div class="menu_match_time text-center">
+                                <div>
+                                    <img ng-src="source/img/{{ x.custom_team_flag }}.png" width="25">
+                                    <span class="menu_span_rigth" ng-bind="x.custom_team_name"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+
+        <!-- **********************************************************************************************************************************************************
+              MAIN CONTENT
+              *********************************************************************************************************************************************************** -->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="row">
+                    <div ng-view></div>
+                    <!--<div class="col-xs-3 ds" id="right_odd">
+                        <h3>胜负赔率</h3>
+                        <div class="fo_win">
+                            <div class="col-xs-4">
+                                <div class="fo_re_win"><div class="fo_re_text" ng-bind="main_info_title.main_team_name"></div></div>
+                                <div class="fo_re_fail"><div class="fo_re_text" ng-bind="threeOdd_home"></div></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="fo_re_win"><div class="fo_re_text">平局</div></div>
+                                <div class="fo_re_fail"><div class="fo_re_text" ng-bind="threeOdd_ping"></div></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="fo_re_win"><div class="fo_re_text" ng-bind="main_info_title.custom_team_name"></div></div>
+                                <div class="fo_re_fail"><div class="fo_re_text" ng-bind="threeOdd_away"></div></div>
+                            </div>
+                        </div>
+
+                        <h3>比分赔率</h3>
+                        <div id="fo_score" class="fo_score">
+                            <div class="col-xs-4 sc_border">
+                                <div class="fo_sc_left" ng-bind="main_info_title.main_team_name"></div>
+                            </div>
+                            <div class="col-xs-4 sc_border_mi">
+                                <div class="fo_sc_mi">
+                                    平局
+                                </div>
+                            </div>
+                            <div class="col-xs-4 sc_border">
+                                <div class="fo_sc_right" ng-bind="main_info_title.custom_team_name"></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="fo_sc_left_bo">
+                                    <p ng-repeat="x in scoreOddWin"><span ng-bind="x.score"></span><span class="odd_right" ng-bind="x.oddStr"></span></p>
+                                    &lt;!&ndash;<p><span class="odd_fo">1-0</span><span class="odd_right">100.00</span></p>&ndash;&gt;
+                                </div>
+                            </div>
+                            <div class="col-xs-4 sc_border_mi_bo">
+                                <div class="fo_sc_mi_bo">
+                                    <p ng-repeat="x in scoreOddPing"><span ng-bind="x.score"></span><span class="odd_right" ng-bind="x.oddStr"></span></p>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="fo_sc_right_bo">
+                                    <p ng-repeat="x in scoreOddLose"><span ng-bind="x.score"></span><span class="odd_right" ng-bind="x.oddStr"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </section>
+        </section>
+
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                Copyright 2017 ©TanGeQiu All Rights Reserved.
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+</div>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="source/js/jquery.js"></script>
+<script src="source/js/jquery-1.8.3.min.js"></script>
+<script src="source/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="source/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="source/js/jquery.scrollTo.min.js"></script>
+<script src="source/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="source/js/jquery.sparkline.js"></script>
+
+
+<!--common script for all pages-->
+<script src="source/js/common-scripts.js"></script>
+
+<script type="text/javascript" src="source/js/gritter/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="source/js/gritter-conf.js"></script>
+
+<!--script for this page-->
+<script src="source/js/echarts.min.js"></script>
+<script src="source/js/sparkline-chart.js"></script>
+<script src="source/js/zabuto_calendar.js"></script>
+<script src="source/js/page-js/common.js"></script>
+<script src="source/js/page-js/index.js"></script>
+<script src="source/js/page-js/detail.js"></script>
+</body>
+</html>

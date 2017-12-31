@@ -1,0 +1,121 @@
+.panel-body{
+    color: #aeb2b7;
+    background-color:#3A3949;
+}
+.panel-default > .panel-heading{
+    color: #aeb2b7;
+    background-color:#3F465A;
+    border-width: 0px;
+}
+.panel{
+    border:none;
+}
+.panel-title{
+    font-size: 12px;
+}
+.panel-default > .panel-heading + .panel-collapse > .panel-body{
+    border-top:none;
+}
+.detail_panel{
+    margin-left: 10px;
+}
+.panel_content_header_left{
+    height: 20px;
+    background-color: #666666;
+}
+.panel_content_header_right{
+    height: 20px;
+    background-color: #666666;
+}
+.panel-body{
+    padding-top: 0px;
+}
+.panel_header_font{
+    font-size: 12px;
+    text-align: center;
+    padding-top: 2px;
+}
+.panel_header_odd{
+    font-size: 12px;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 1px solid #777777;
+    /*border-bottom: 1px solid #777777;*/
+}
+
+.panel_header_odd_right{
+    font-size: 12px;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 1px solid #777777;
+    /*border-left: 1px solid #777777;
+    border-right: 1px solid #777777;
+    border-bottom: 1px solid #777777;*/
+}
+
+.odd_back{
+    border-color: #639CDD;
+    color: #639CDD;
+}
+.score_odd{
+    height:20px;
+    text-align: center;
+    border-left: 1px solid #777777;
+    border-bottom: 1px solid #777777;
+    padding-top: 2px;
+}
+.right_border{
+    border-right: 1px solid #777777;
+}
+.score_color{
+    color: #f5f293;
+}
+.table_score{
+    color: white;
+    margin-right: 20px;
+}
+.table_odd{
+    color: #f5f293;
+}
+.score_odd_title{
+    color: white;
+}
+.win_persent_first{
+    height: 20px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    border-bottom: 1px solid #777777;
+}
+.win_persent_end{
+    height: 20px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    border-bottom: 1px solid #777777;
+}
+
+.win_persent{
+    height: 20px;
+    margin-top: 5px;
+    border-bottom: 1px solid #777777;
+}
+
+.panel-group{
+    margin-bottom: 5px;
+}
+.text_center{
+    text-align: center;
+}
+.six_name{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.right_line{
+    border-right: 1px solid #777777;
+}
+.last_bottom{
+    padding-bottom: 30px;
+    background-color: #3A3949;
+}

@@ -1,0 +1,133 @@
+<script src="source/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="source/js/common-scripts.js"></script>
+<div class="col-md-12 main-chart">
+    <div class="row main_content_row1">
+        <div class="col-md-1 col-md-offset-3">
+            <img ng-src="source/img/{{ main_info_title.main_team_flag }}.png" width="50">
+        </div>
+        <div class="col-md-2 main_title_text" ng-bind="main_info_title.main_team_name"></div>
+        <div class="col-md-2 main_title_text" ng-bind="main_info_title.custom_team_name"></div>
+        <div class="col-md-1">
+            <img ng-src="source/img/{{ main_info_title.custom_team_flag }}.png" width="50">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb">
+            <div class="darkblue-panel">
+                <div class="main_header">
+                    <span>联赛数据</span>
+                </div>
+                <div class="main-content">
+                    <div class="col-md-6 league_data">
+                        <div class="col-md-2 col-md-offset-1">
+                            排名
+                        </div>
+                        <div class="col-md-1">
+                            胜
+                        </div>
+                        <div class="col-md-1">
+                            平
+                        </div>
+                        <div class="col-md-1">
+                            负
+                        </div>
+                        <div class="col-md-2">
+                            进球
+                        </div>
+                        <div class="col-md-2">
+                            失球
+                        </div>
+                        <div class="col-md-2">
+                            积分
+                        </div>
+                    </div>
+                    <div class="col-md-6 league_data">
+                        <div class="col-md-2">
+                            排名
+                        </div>
+                        <div class="col-md-1">
+                            胜
+                        </div>
+                        <div class="col-md-1">
+                            平
+                        </div>
+                        <div class="col-md-1">
+                            负
+                        </div>
+                        <div class="col-md-2">
+                            进球
+                        </div>
+                        <div class="col-md-2">
+                            失球
+                        </div>
+                        <div class="col-md-2">
+                            积分
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="col-md-6 league_data_num">
+                        <div class="col-md-2 col-md-offset-1" ng-bind="league_data_main.rank_num"></div>
+                        <div class="col-md-1" ng-bind="league_data_main.win_num"></div>
+                        <div class="col-md-1" ng-bind="league_data_main.tie_num"></div>
+                        <div class="col-md-1" ng-bind="league_data_main.lose_num"></div>
+                        <div class="col-md-2" ng-bind="league_data_main.win_goal"></div>
+                        <div class="col-md-2" ng-bind="league_data_main.lose_goal"></div>
+                        <div class="col-md-2" ng-bind="league_data_main.point"></div>
+                    </div>
+                    <div class="col-md-6 league_data_num">
+                        <div class="col-md-2" ng-bind="league_data_cust.rank_num"></div>
+                        <div class="col-md-1" ng-bind="league_data_cust.win_num"></div>
+                        <div class="col-md-1" ng-bind="league_data_cust.tie_num"></div>
+                        <div class="col-md-1" ng-bind="league_data_cust.lose_num"></div>
+                        <div class="col-md-2" ng-bind="league_data_cust.win_goal"></div>
+                        <div class="col-md-2" ng-bind="league_data_cust.lose_goal"></div>
+                        <div class="col-md-2" ng-bind="league_data_cust.point"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb">
+            <div class="darkblue-panel" id = "main_top">
+                <div class="main_header">
+                    <span>交手记录</span>
+                </div>
+                <div ng-repeat="x in fight_record" class="main-content-1">
+                    <div class="col-md-2 col-md-offset-1 main_content_top" ng-bind="x.league_name"></div>
+                    <div class="col-md-2 main_content_top" ng-bind="x.match_time"></div>
+                    <div class="col-md-2 main_content_top" ng-bind="x.home_team"></div>
+                    <div class="col-md-2 main_content_score" ng-bind="x.match_score"></div>
+                    <div class="col-md-2 main_content_top" ng-bind="x.away_team"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb">
+            <div class="darkblue-panel" id = "main_top">
+                <div class="main_header">
+                    <span>近期战绩</span>
+                </div>
+                <div class="main-content-1" ng-repeat="x in nearly_record_home">
+                    <div class="col-md-3 main_content_top col-md-offset-1" ng-bind="x.home_team"></div>
+                    <div class="col-md-2 main_content_score" ng-bind="x.score"></div>
+                    <div class="col-md-3 main_content_top" ng-bind="x.away_team"></div>
+                    <div class="col-md-2 {{x.if_win === '胜' ? 'main_content_win' : (x.if_win === '平' ? 'main_content_ping' : (x.if_win === '负' ? 'main_content_lose' : 'main_content_ping'))}}" ng-bind="x.if_win"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb">
+            <div class="darkblue-panel" id = "main_top">
+                <div class="main_header">
+                    <span>近期战绩</span>
+                </div>
+                <div class="main-content-1" ng-repeat="x in nearly_record_away">
+                    <div class="col-md-3 main_content_top col-md-offset-1" ng-bind="x.home_team"></div>
+                    <div class="col-md-2 main_content_score" ng-bind="x.score"></div>
+                    <div class="col-md-3 main_content_top" ng-bind="x.away_team"></div>
+                    <div class="col-md-2  {{x.if_win === '胜' ? 'main_content_win' : (x.if_win === '平' ? 'main_content_ping' : (x.if_win === '负' ? 'main_content_lose' : 'main_content_ping'))}}" ng-bind="x.if_win"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
